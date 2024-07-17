@@ -8,6 +8,7 @@ if (NOT APPLE)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -static-libgcc -static-libstdc++")
 endif ()
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -28,6 +29,7 @@ if (NOT inferno_FOUND)
 endif ()
 
 add_executable(${PROJECT_NAME}
+        resources.rc
         src/game.cpp
         src/game.h
         src/scenes/MainScene.cpp
