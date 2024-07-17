@@ -30,7 +30,23 @@ add_executable(${PROJECT_NAME}
         src/scenes/MainScene.h
 )
 
-target_link_libraries(${PROJECT_NAME} PUBLIC inferno)
+if (NOT DEFINED ${PLATFORM})
+    set(PLATFORM "Desktop")
+endif ()
+
+if (NOT APPLE)
+    target_link_libraries(${PROJECT_NAME} PUBLIC inferno)
+endif ()
+
+if (APPLE)
+    target_link_libraries(${PROJECT_NAME} PUBLIC inferno
+            "-framework CoreVideo"
+            "-framework IOKit"
+            "-framework Cocoa"
+            "-framework GLUT"
+            "-framework OpenGL"
+    )
+endif ()
 
 if (${PLATFORM} STREQUAL "Desktop")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3 -s -mwindows")
@@ -45,10 +61,4 @@ else ()
             COMMAND ${CMAKE_COMMAND} -E copy_directory
             ${PROJECT_SOURCE_DIR}/resources $<TARGET_FILE_DIR:${PROJECT_NAME}>/resources
     )
-endif ()
-
-if (APPLE)
-    target_link_libraries(${PROJECT_NAME} "-framework IOKit")
-    target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
-    target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
 endif ()
