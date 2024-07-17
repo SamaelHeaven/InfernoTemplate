@@ -34,12 +34,9 @@ add_executable(${PROJECT_NAME}
         src/scenes/MainScene.h
 )
 
-if (NOT APPLE)
-    target_link_libraries(${PROJECT_NAME} PUBLIC inferno)
-endif ()
-
+set(LIBRARIES inferno)
 if (APPLE)
-    target_link_libraries(${PROJECT_NAME} PUBLIC inferno
+    set(LIBRARIES ${LIBRARIES}
             "-framework CoreVideo"
             "-framework IOKit"
             "-framework Cocoa"
@@ -47,6 +44,8 @@ if (APPLE)
             "-framework OpenGL"
     )
 endif ()
+
+target_link_libraries(${PROJECT_NAME} PUBLIC ${LIBRARIES})
 
 if (${PLATFORM} STREQUAL "Desktop")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3 -s -mwindows")
