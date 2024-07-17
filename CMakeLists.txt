@@ -3,7 +3,11 @@ project(game)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -static-libgcc -static-libstdc++")
+
+if (NOT APPLE)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -static-libgcc -static-libstdc++")
+endif ()
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -29,10 +33,6 @@ add_executable(${PROJECT_NAME}
         src/scenes/MainScene.cpp
         src/scenes/MainScene.h
 )
-
-if (NOT DEFINED ${PLATFORM})
-    set(PLATFORM "Desktop")
-endif ()
 
 if (NOT APPLE)
     target_link_libraries(${PROJECT_NAME} PUBLIC inferno)
