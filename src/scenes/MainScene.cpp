@@ -4,11 +4,12 @@ MainScene::MainScene() = default;
 
 MainScene::~MainScene() = default;
 
-void MainScene::initialize() {
-    std::cout << "Initializing..." << std::endl;
-}
+void MainScene::initialize() {}
 
 void MainScene::update() {
-    std::cout << "FPS: " << Time::current_fps() << std::endl;
     Renderer::clear_background(Color::BLUE);
+    Game::set_title(std::string("FPS: ") + std::to_string(Time::current_fps()));
+    if (Keyboard::is_key_pressed(Key::TAB)) {
+        Game::toggle_fullscreen();
+    }
 }
