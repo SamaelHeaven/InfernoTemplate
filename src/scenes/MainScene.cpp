@@ -27,5 +27,7 @@ void MainScene::update() {
         direction += Vector2::RIGHT;
     }
     const auto new_position = Mouse::get_position() + direction * speed;
-    Mouse::set_position(new_position);
+    if (direction != Vector2::ZERO) {
+        Mouse::set_position(new_position);
+    }
 }
