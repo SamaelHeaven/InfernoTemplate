@@ -26,6 +26,7 @@ void MainScene::update() {
     if (Keyboard::is_key_down(Key::RIGHT)) {
         direction += Vector2::RIGHT;
     }
+    direction = direction.normalize();
     const auto new_position = Mouse::get_position() + direction * speed;
     if (direction != Vector2::ZERO) {
         Mouse::set_position(new_position);
