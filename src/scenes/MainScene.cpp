@@ -59,4 +59,10 @@ void MainScene::update() {
     if (Mouse::get_cursor() != cursor) {
         std::cout << "Cursor: " << magic_enum::enum_name(Mouse::get_cursor()) << '\n';
     }
+
+    // Scroll
+
+    if (const auto scroll = Mouse::get_scroll(); scroll != Vector2::ZERO) {
+        std::cout << "Scroll: " << scroll.to_string() << '\n';
+    }
 }
