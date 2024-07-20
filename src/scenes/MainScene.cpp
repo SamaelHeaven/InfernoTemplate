@@ -24,20 +24,7 @@ void MainScene::update() {
     // Moving mouse
 
     const auto speed = 200 * Time::delta();
-    Vector2 direction;
-    if (Keyboard::is_key_down(Key::UP)) {
-        direction += Vector2::UP;
-    }
-    if (Keyboard::is_key_down(Key::DOWN)) {
-        direction += Vector2::DOWN;
-    }
-    if (Keyboard::is_key_down(Key::LEFT)) {
-        direction += Vector2::LEFT;
-    }
-    if (Keyboard::is_key_down(Key::RIGHT)) {
-        direction += Vector2::RIGHT;
-    }
-    direction = direction.normalize();
+    const auto direction = InputAxis::get_both().normalize();
     const auto new_position = Mouse::get_position() + direction * speed;
     if (direction != Vector2::ZERO) {
         Mouse::set_position(new_position);
