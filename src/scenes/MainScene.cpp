@@ -4,8 +4,7 @@ MainScene::MainScene() = default;
 
 MainScene::~MainScene() = default;
 
-void MainScene::initialize() {
-}
+void MainScene::initialize() {}
 
 void MainScene::update() {
     // Clearing background
@@ -47,7 +46,7 @@ void MainScene::update() {
     // Changing cursor
 
     const auto cursor = Mouse::get_cursor();
-    for (int i = 0; i < static_cast<int32_t>(Key::NINE) + 1 - static_cast<int32_t>(Key::ZERO); i++) {
+    for (int32_t i = 0; i < static_cast<int32_t>(Key::NINE) + 1 - static_cast<int32_t>(Key::ZERO); i++) {
         if (Keyboard::is_key_pressed(static_cast<Key>(static_cast<int32_t>(Key::ZERO) + i))) {
             Mouse::set_cursor(static_cast<Cursor>(i + 1));
         }
