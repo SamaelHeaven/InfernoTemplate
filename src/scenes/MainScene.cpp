@@ -46,7 +46,7 @@ void MainScene::update() {
     // Changing cursor
 
     const auto cursor = Mouse::get_cursor();
-    for (int32_t i = 0; i < static_cast<int32_t>(Key::NINE) + 1 - static_cast<int32_t>(Key::ZERO); i++) {
+    for (auto i = 0; i < static_cast<int32_t>(Key::NINE) + 1 - static_cast<int32_t>(Key::ZERO); i++) {
         if (Keyboard::is_key_pressed(static_cast<Key>(static_cast<int32_t>(Key::ZERO) + i))) {
             Mouse::set_cursor(static_cast<Cursor>(i + 1));
         }
@@ -65,4 +65,16 @@ void MainScene::update() {
     if (const auto scroll = Mouse::get_scroll(); scroll != Vector2::ZERO) {
         std::cout << "Scroll: " << scroll.to_string() << '\n';
     }
+
+    // Gamepad
+
+    const auto gamepad = Gamepad::get(0);
+    magic_enum::enum_for_each<GamepadButton>([gamepad](const GamepadButton button) {
+        if (gamepad->is_button_pressed(button)) {
+            std::cout << "Gamepad button pressed: " << magic_enum::enum_name(button) << '\n';
+        }
+        if (gamepad->is_button_released(button)) {
+            std::cout << "Gamepad button released: " << magic_enum::enum_name(button) << '\n';
+        }
+    });
 }
