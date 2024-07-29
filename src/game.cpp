@@ -1,8 +1,9 @@
 #include "./scenes/MainScene.h"
 
-void main([[maybe_unused]] std::vector<std::string> args) {
+int32_t main([[maybe_unused]] std::list<std::string> args) {
     GameConfig config;
     config.icon = "textures/icon.png";
     file::set_working_directory("resources");
     Game::launch<MainScene>(config);
+    return 0;
 }
